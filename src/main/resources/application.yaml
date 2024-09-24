@@ -1,0 +1,17 @@
+#spring.application.name=demo05
+
+spring:
+  application:
+    name: demo05
+  datasource:
+    name: demo05
+    url: jdbc:mysql://localhost:3306/demo05
+    username: root
+    password: 123456
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  # 配置映射文件
+  type-aliases-package: com.example.demo05.bean  # 配置实体类
+
+server:
+  port: 8081

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo05.mapper.UserMapper">
+
+<!--    验证用户账号和密码-->
+    <select id="getInfo" parameterType="String" resultType="com.example.demo05.bean.UserBean">
+        SELECT * FROM user WHERE name = #{username} AND password = #{password}
+    </select>
+
+<!--    根据id查询用户信息-->
+    <select id="selectUserById" resultMap="userResultMap" parameterType="String" resultType="com.example.demo05.bean.UserBean">
+        SELECT * from user where id = #{id}
+    </select>
+
+    <resultMap id="userResultMap" type="com.example.demo05.bean.UserBean">
+        <id column="id" property="id"/>
+        <result column="name" property="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+<!--    查询所有用户信息-->
+    <select id="queryAllUser" resultMap="userResultMap" parameterType="String" resultType="com.example.demo05.bean.UserBean">
+        select * from user
+    </select>
+
+<!--    插入新用户信息，id是自动生成的，返回数据库操作影响行数��为0则是失败-->
+    <insert id="insertUser" parameterType="com.example.demo05.bean.UserBean">
+        insert into user(name, password) values (#{username}, #{password})
+    </insert>
+
+<!--    修改用户-->
+    <update id="updateUser" parameterType="com.example.demo05.bean.UserBean">
+        update user set name = #{username}, password = #{password} where id = #{id}
+    </update>
+
+<!--    删除用户-->
+    <delete id="deleteUser" parameterType="String">
+        delete from user where id = #{id}
+    </delete>
+
+</mapper>
